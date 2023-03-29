@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/elearning
+    username: root
+    password: MySQLroot
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+  configuration:
+    mapper-locations: classpath:com/sustech/mapper/xml/*.xml
+
+server:
+  port: 8181

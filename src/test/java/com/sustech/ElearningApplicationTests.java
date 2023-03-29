@@ -1,4 +1,4 @@
-package com.sustech.elearning;
+package com.sustech;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
