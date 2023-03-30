@@ -7,7 +7,15 @@ spring:
 
 mybatis-plus:
   configuration:
-    mapper-locations: classpath:com/sustech/mapper/xml/*.xml
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 server:
   port: 8181
+
+sa-token:
+  timeout: 2592000
+  activity-timeout: -1
+  is-concurrent: true
+  is-share: false
+  is-log: false
+

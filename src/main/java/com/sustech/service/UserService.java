@@ -14,4 +14,10 @@ import org.springframework.stereotype.Service;
  */
 public interface UserService extends IService<User> {
 
+    boolean sendEmail(String email, String text);
+
+    boolean sendNotification(String email);
+
+    String sendVerification(String email);
+
 }
