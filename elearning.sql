@@ -71,8 +71,3 @@ CREATE TABLE `post`
     FOREIGN KEY (thread_id) REFERENCES thread (thread_id)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
-
-
-
-
-
