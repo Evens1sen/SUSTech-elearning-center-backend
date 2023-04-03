@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -91,6 +92,12 @@ public class UserController {
 
         StpUtil.login(user.getUserId());
         return SaResult.ok("登录成功");
+    }
+
+    @ApiOperation(value = "获取所有用户")
+    @GetMapping("/listUser")
+    public List<User> listUser() {
+        return userService.list();
     }
 
     @ApiOperation(value = "检测是否登录")
