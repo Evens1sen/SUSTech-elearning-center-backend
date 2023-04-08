@@ -30,13 +30,13 @@ public class CourseEvent implements Serializable {
 
     private Integer courseId;
 
-    private String event_type;
+    private String eventType;
 
     private String eventName;
 
     private String eventInstructor;
 
-    private String event_resources;
+    private String eventResources;
 
     private LocalDateTime startTime;
 
