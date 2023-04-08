@@ -17,7 +17,7 @@ CREATE TABLE `course`
     `course_code` VARCHAR(255) NOT NULL,
     `semester`    VARCHAR(255) NOT NULL,
     `instructor`  VARCHAR(255) NOT NULL,
-    `course_name` VARCHAR(255) NOT NULL,
+    `course_name` VARCHAR(255) NOT NULL, -- Course IDs seperated by ','
     `description` VARCHAR(255)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
@@ -25,14 +25,16 @@ CREATE TABLE `course`
 DROP TABLE IF EXISTS `course_event`;
 CREATE TABLE `course_event`
 (
-    `event_id`   INT PRIMARY KEY AUTO_INCREMENT,
-    `course_id`  INT          NOT NULL,
-    `semester`   VARCHAR(255) NOT NULL,
-    `instructor` VARCHAR(255) NOT NULL,
-    `event_name` VARCHAR(255) NOT NULL,
-    `start_time` DATETIME     NOT NULL,
-    `end_time`   DATETIME     NOT NULL,
-    FOREIGN KEY (course_id) REFERENCES course (course_id)
+    `event_id`         INT PRIMARY KEY AUTO_INCREMENT,
+    `course_id`        INT          NOT NULL,
+    `event_name`       VARCHAR(255) NOT NULL,
+    `event_type`       VARCHAR(255) NOT NULL,
+    `event_instructor` VARCHAR(255),
+    `event_resources`   VARCHAR(255), -- URLs seperated by ':'
+    `start_time`       DATETIME     NOT NULL,
+    `end_time`         DATETIME     NOT NULL,
+    FOREIGN KEY (course_id) REFERENCES course (course_id),
+    CONSTRAINT `event_type_enum` CHECK (event_type in ('Lecture', 'Lab', 'Assignment', 'Project', 'Exam'))
 );
 
 DROP TABLE IF EXISTS `course_announcement`;
