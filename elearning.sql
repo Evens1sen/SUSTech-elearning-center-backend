@@ -1,11 +1,12 @@
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`
 (
-    `user_id`  INT PRIMARY KEY,
-    `password` VARCHAR(255) NOT NULL,
-    `name`     VARCHAR(255) NOT NULL,
-    `email`    VARCHAR(255) NOT NULL,
-    `avatar`   VARCHAR(255)
+    `user_id`     INT PRIMARY KEY,
+    `password`    VARCHAR(255) NOT NULL,
+    `name`        VARCHAR(255) NOT NULL,
+    `email`       VARCHAR(255) NOT NULL,
+    `avatar`      VARCHAR(255),
+    `course_list` VARCHAR(255)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
