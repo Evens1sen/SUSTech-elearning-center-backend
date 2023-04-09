@@ -90,7 +90,7 @@ public class UserController {
         }
 
         StpUtil.login(user.getUserId());
-        return SaResult.ok("登录成功");
+        return SaResult.data(StpUtil.getTokenInfo());
     }
 
     @ApiOperation(value = "获取所有用户")
@@ -100,9 +100,10 @@ public class UserController {
     }
 
     @ApiOperation(value = "获取当前用户的所有课程")
-    @GetMapping("/listUserCourse")
-    public List<Course> listUserCourse() {
-        Integer userID = StpUtil.getLoginIdAsInt();
+    @GetMapping("/listUserCourse/{userID}")
+    public List<Course> listUserCourse(@PathVariable String userID) {
+        // FIXME
+//        Integer userID = StpUtil.getLoginIdAsInt();
         User user = userService.getById(userID);
         List<String> courseIDList = List.of(user.getCourseList().split(","));
         return courseService.listByIds(courseIDList);
