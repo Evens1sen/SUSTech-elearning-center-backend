@@ -14,8 +14,8 @@ public class CourseAnnouncementControllerTest {
     @Autowired
     public CourseAnnouncementService courseAnnouncementService;
 
-    Integer exampleCourseId;
-    Integer nullCourseId;
+    Integer exampleCourseId = 114514;
+    Integer nullCourseId = -1;
 
     @Test
     void listCourseAnnouncement() {
