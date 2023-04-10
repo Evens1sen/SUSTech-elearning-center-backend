@@ -1,9 +1,11 @@
 package com.sustech.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sustech.entity.User;
 import com.sustech.mapper.UserMapper;
 import com.sustech.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.GeneralSecurityException;
@@ -20,6 +22,9 @@ import java.util.Random;
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+
+    @Autowired
+    public UserMapper userMapper;
 
     @Override
     public boolean sendNotification(String email) {

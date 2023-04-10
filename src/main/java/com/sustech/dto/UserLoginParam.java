@@ -14,4 +14,13 @@ public class UserLoginParam {
     @NotNull(message = "Password should not be null")
     @ApiModelProperty(value = "Password", required = true)
     private String password;
+
+    public UserLoginParam(int uid, String password) {
+        this.uid = uid;
+        this.password = password;
+    }
+
+    public UserLoginParam(){
+
+    }
 }

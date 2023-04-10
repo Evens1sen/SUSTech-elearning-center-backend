@@ -9,7 +9,9 @@ import com.sustech.dto.Result;
 import com.sustech.dto.ResultCode;
 import com.sustech.dto.UserLoginParam;
 import com.sustech.dto.UserRegisterParam;
+import com.sustech.entity.Course;
 import com.sustech.entity.User;
+import com.sustech.service.CourseService;
 import com.sustech.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -35,11 +38,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @ApiOperation(value = "Demo")
-    @GetMapping("/demo")
-    public String demo() {
-        return "qx";
-    }
+    @Autowired
+    private CourseService courseService;
 
     @ApiOperation(value = "注册")
     @PostMapping("/register")
@@ -90,7 +90,23 @@ public class UserController {
         }
 
         StpUtil.login(user.getUserId());
-        return SaResult.ok("登录成功");
+        return SaResult.data(StpUtil.getTokenInfo());
+    }
+
+    @ApiOperation(value = "获取所有用户")
+    @GetMapping("/listUser")
+    public List<User> listUser() {
+        return userService.list();
+    }
+
+    @ApiOperation(value = "获取当前用户的所有课程")
+    @GetMapping("/listUserCourse/{userID}")
+    public List<Course> listUserCourse(@PathVariable String userID) {
+        // FIXME
+//        Integer userID = StpUtil.getLoginIdAsInt();
+        User user = userService.getById(userID);
+        List<String> courseIDList = List.of(user.getCourseList().split(","));
+        return courseService.listByIds(courseIDList);
     }
 
     @ApiOperation(value = "检测是否登录")
