@@ -1,5 +1,11 @@
 package com.sustech.controller;
 
-public class PostControllerTest {
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
+public class PostControllerTest {
+    @Autowired
+    public PostController postController;
 }
