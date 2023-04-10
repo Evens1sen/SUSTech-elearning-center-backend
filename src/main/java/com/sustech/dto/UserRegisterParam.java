@@ -25,4 +25,10 @@ public class UserRegisterParam {
     @ApiModelProperty(value = "Email")
     private String email;
 
+    public UserRegisterParam(int id, String name, String password, String email) {
+        this.userId = id;
+        this.name = name;
+        this.password = password;
+        this.email = email;
+    }
 }
