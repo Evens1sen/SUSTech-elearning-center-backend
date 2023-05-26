@@ -14,4 +14,5 @@ import org.springframework.stereotype.Service;
  */
 public interface CourseService extends IService<Course> {
 
+    void updateCourse(int courseId ,String courseCode, String semester, String instructor, String courseName,String description);
 }

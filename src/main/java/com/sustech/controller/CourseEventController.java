@@ -4,6 +4,7 @@ package com.sustech.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.sustech.VO.CourseEventVO;
 import com.sustech.entity.Course;
+import com.sustech.entity.CourseAnnouncement;
 import com.sustech.entity.CourseEvent;
 import com.sustech.entity.User;
 import com.sustech.service.CourseEventService;
@@ -14,12 +15,11 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -84,6 +84,38 @@ public class CourseEventController {
         queryWrapper.eq("event_type", eventType);
         return courseEventService.list(queryWrapper);
     }
+
+    @ApiOperation(value = "增加新课程事件")
+    @RequestMapping(value = "/addCourseEvent/{courseId}/{eventId}", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean addCourseEvent(@PathVariable int courseId , @PathVariable int eventId, String eventName, String eventType, String eventInstructor, String eventResources, LocalDateTime startTime, LocalDateTime endTime) {
+        CourseEvent courseEvent = new CourseEvent();
+        courseEvent.setCourseId(courseId);
+        courseEvent.setEventId(eventId);
+        courseEvent.setEventName(eventName);
+        courseEvent.setEventType(eventType);
+        courseEvent.setEventInstructor(eventInstructor);
+        courseEvent.setEventResources(eventResources);
+        courseEvent.setStartTime(startTime);
+        courseEvent.setEndTime(endTime);
+        return courseEventService.save(courseEvent);
+    }
+
+    @ApiOperation(value = "更新课程事件")
+    @RequestMapping(value = "/updateCourseEvent/{courseId}/{eventId}", method = RequestMethod.PUT)
+    @ResponseBody
+    public void updateCourseEvent(@PathVariable int courseId , @PathVariable int eventId, String eventName, String eventType, String eventInstructor, String eventResources, LocalDateTime startTime, LocalDateTime endTime) {
+        courseEventService.updateCourseEvent(courseId,eventId,eventName,eventType,eventInstructor,eventResources,startTime,endTime);
+    }
+
+    @ApiOperation(value = "删除课程事件")
+    @RequestMapping(value = "/deleteCourseEvent/{eventId}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public boolean deleteCourseEvent (@PathVariable int eventId) {
+        return courseEventService.removeById(eventId);
+    }
+
+
 
 }
 

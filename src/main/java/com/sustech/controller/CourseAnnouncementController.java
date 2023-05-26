@@ -9,10 +9,8 @@ import com.sustech.service.CourseAnnouncementService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,11 +31,36 @@ public class CourseAnnouncementController {
     public CourseAnnouncementService courseAnnouncementService;
 
     @ApiOperation(value = "获取所有课程通知")
-    @GetMapping("/listCourseAnnouncement/{courseID}")
-    public List<CourseAnnouncement> listCourseAnnouncement(@PathVariable Integer courseID) {
+    @GetMapping("/listCourseAnnouncement/{courseId}")
+    public List<CourseAnnouncement> listCourseAnnouncement(@PathVariable Integer courseId) {
         QueryWrapper<CourseAnnouncement> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("course_id", courseID);
+        queryWrapper.eq("course_id", courseId);
         return courseAnnouncementService.list(queryWrapper);
+    }
+    @ApiOperation(value = "增加新课程通知")
+    @RequestMapping(value = "/addCourseAnnouncement/{courseId}/{announcementId}", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean addCourseAnnouncement(@PathVariable int courseId ,@PathVariable int announcementId, String subject, String content) {
+       CourseAnnouncement courseAnnouncement = new CourseAnnouncement();
+       courseAnnouncement.setAnnouncementId(announcementId);
+       courseAnnouncement.setCourseId(courseId);
+       courseAnnouncement.setContent(content);
+       courseAnnouncement.setSubject(subject);
+       return courseAnnouncementService.save(courseAnnouncement);
+    }
+
+    @ApiOperation(value = "更新课程通知")
+    @RequestMapping(value = "/updateCourseAnnouncement/{courseId}/{announcementId}", method = RequestMethod.PUT)
+    @ResponseBody
+    public void updateCourseAnnouncement (@PathVariable int courseId ,@PathVariable int announcementId, String subject, String content) {
+        courseAnnouncementService.updateCourseAnnouncement(courseId, announcementId, subject, content);
+    }
+
+    @ApiOperation(value = "删除课程通知")
+    @RequestMapping(value = "/deleteCourseAnnouncement/{announcementId}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public boolean deleteCourseAnnouncement (@PathVariable int announcementId) {
+        return courseAnnouncementService.removeById(announcementId);
     }
 }
 
