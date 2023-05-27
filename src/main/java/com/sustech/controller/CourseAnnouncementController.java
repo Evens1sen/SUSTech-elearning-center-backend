@@ -41,7 +41,7 @@ public class CourseAnnouncementController {
     @ApiOperation(value = "增加新课程通知")
     @RequestMapping(value = "/addCourseAnnouncement/{courseId}", method = RequestMethod.POST)
     @ResponseBody
-    public boolean addCourseAnnouncement(@PathVariable int courseId, String subject, String content) {
+    public boolean addCourseAnnouncement(@PathVariable int courseId, @RequestParam String subject, @RequestParam String content) {
         CourseAnnouncement courseAnnouncement = new CourseAnnouncement();
         courseAnnouncement.setCourseId(courseId);
         courseAnnouncement.setContent(content);
