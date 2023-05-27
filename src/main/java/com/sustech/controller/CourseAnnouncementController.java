@@ -37,29 +37,33 @@ public class CourseAnnouncementController {
         queryWrapper.eq("course_id", courseId);
         return courseAnnouncementService.list(queryWrapper);
     }
+
     @ApiOperation(value = "增加新课程通知")
-    @RequestMapping(value = "/addCourseAnnouncement/{courseId}/{announcementId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/addCourseAnnouncement/{courseId}", method = RequestMethod.POST)
     @ResponseBody
-    public boolean addCourseAnnouncement(@PathVariable int courseId ,@PathVariable int announcementId, String subject, String content) {
-       CourseAnnouncement courseAnnouncement = new CourseAnnouncement();
-       courseAnnouncement.setAnnouncementId(announcementId);
-       courseAnnouncement.setCourseId(courseId);
-       courseAnnouncement.setContent(content);
-       courseAnnouncement.setSubject(subject);
-       return courseAnnouncementService.save(courseAnnouncement);
+    public boolean addCourseAnnouncement(@PathVariable int courseId, String subject, String content) {
+        CourseAnnouncement courseAnnouncement = new CourseAnnouncement();
+        courseAnnouncement.setCourseId(courseId);
+        courseAnnouncement.setContent(content);
+        courseAnnouncement.setSubject(subject);
+        return courseAnnouncementService.save(courseAnnouncement);
     }
 
     @ApiOperation(value = "更新课程通知")
-    @RequestMapping(value = "/updateCourseAnnouncement/{courseId}/{announcementId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/updateCourseAnnouncement/{announcementId}", method = RequestMethod.PUT)
     @ResponseBody
-    public void updateCourseAnnouncement (@PathVariable int courseId ,@PathVariable int announcementId, String subject, String content) {
-        courseAnnouncementService.updateCourseAnnouncement(courseId, announcementId, subject, content);
+    public void updateCourseAnnouncement(@PathVariable int announcementId, @RequestParam String subject, @RequestParam String content) {
+        CourseAnnouncement courseAnnouncement = new CourseAnnouncement();
+        courseAnnouncement.setAnnouncementId(announcementId);
+        courseAnnouncement.setContent(content);
+        courseAnnouncement.setSubject(subject);
+        courseAnnouncementService.updateById(courseAnnouncement);
     }
 
     @ApiOperation(value = "删除课程通知")
     @RequestMapping(value = "/deleteCourseAnnouncement/{announcementId}", method = RequestMethod.DELETE)
     @ResponseBody
-    public boolean deleteCourseAnnouncement (@PathVariable int announcementId) {
+    public boolean deleteCourseAnnouncement(@PathVariable int announcementId) {
         return courseAnnouncementService.removeById(announcementId);
     }
 }
