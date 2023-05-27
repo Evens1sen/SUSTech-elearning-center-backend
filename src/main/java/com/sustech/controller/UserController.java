@@ -52,6 +52,7 @@ public class UserController {
 
         user.setName(userRegisterParam.getName());
         user.setEmail(userRegisterParam.getEmail());
+        user.setRole("Student");
 
         boolean result;
         try {
@@ -107,6 +108,21 @@ public class UserController {
         User user = userService.getById(userID);
         List<String> courseIDList = List.of(user.getCourseList().split(","));
         return courseService.listByIds(courseIDList);
+    }
+
+    @ApiOperation(value = "获取当前用户的角色")
+    @GetMapping("/getUserRole/{userID}")
+    public String getUserRole(@PathVariable String userID) {
+        User user = userService.getById(userID);
+        return user.getRole();
+    }
+
+    @ApiOperation(value = "设置用户角色（Student / Teacher）")
+    @PutMapping("/setUserRole/{userId}/{role}")
+    public boolean setUserRole(@PathVariable Integer userId, @PathVariable String role) {
+        User user = userService.getById(userId);
+        user.setRole(role);
+        return userService.save(user);
     }
 
     @ApiOperation(value = "检测是否登录")

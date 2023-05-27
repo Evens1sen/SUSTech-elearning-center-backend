@@ -6,7 +6,9 @@ CREATE TABLE `user`
     `name`        VARCHAR(255) NOT NULL,
     `email`       VARCHAR(255) NOT NULL,
     `avatar`      VARCHAR(255),
-    `course_list` VARCHAR(255)
+    `course_list` VARCHAR(255),
+    `role` VARCHAR(255) NOT NULL ,
+    CONSTRAINT `role_enum` CHECK (role in ('Student', 'Teacher'))
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 

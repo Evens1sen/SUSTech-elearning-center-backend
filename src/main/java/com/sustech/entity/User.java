@@ -34,4 +34,6 @@ public class User implements Serializable {
 
     private String courseList;
 
+    private String role;
+
 }
