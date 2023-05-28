@@ -1,4 +1,4 @@
-package com.sustech.VO;
+package com.sustech.vo;
 
 import lombok.Data;
 

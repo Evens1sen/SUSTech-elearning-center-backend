@@ -2,7 +2,7 @@ package com.sustech.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.sustech.VO.CourseEventVO;
+import com.sustech.vo.CourseEventVO;
 import com.sustech.dto.CourseEventParam;
 import com.sustech.entity.Course;
 import com.sustech.entity.CourseEvent;
