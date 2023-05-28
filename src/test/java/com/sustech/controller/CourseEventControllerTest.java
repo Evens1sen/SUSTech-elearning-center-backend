@@ -22,32 +22,41 @@ public class CourseEventControllerTest {
     @Autowired
     public UserService userService;
 
+    Integer existingUserId = 11451414;
 
-    Integer existingUserId = 114514;
     Integer nullUserId = -1;
-    Integer existingCourseId = 114514;
+    Integer existingCourseId = 1;
     Integer nullCourseId = -1;
     String existingEventType = "Exam";
-    String nullEventType= "Homo";
+    String nullEventType = "Homo";
 
     @Test
-    void getAllCourseEvent(){
+    void getAllCourseEvents() {
         System.out.println(courseEventController.getAllCourseEvents(existingUserId));
-        System.out.println(courseEventController.getAllCourseEvents(nullUserId));
     }
 
-
     @Test
-    void listCourseEvent(){
+    void listCourseEvent() {
         System.out.println(courseEventController.listCourseEvent(existingCourseId));
-        System.out.println(courseEventController.listCourseEvent(nullCourseId));
     }
 
     @Test
-    void listCourseEventByType(){
-        System.out.println(courseEventController.listCourseEventByType(existingCourseId,existingEventType));
-        System.out.println(courseEventController.listCourseEventByType(nullCourseId,existingEventType));
-        System.out.println(courseEventController.listCourseEventByType(existingCourseId,nullEventType));
-        System.out.println(courseEventController.listCourseEventByType(nullCourseId,nullEventType));
+    void listCourseEventByType() {
+        System.out.println(courseEventController.listCourseEventByType(existingCourseId, existingEventType));
+        System.out.println(courseEventController.listCourseEventByType(nullCourseId, existingEventType));
+        System.out.println(courseEventController.listCourseEventByType(existingCourseId, nullEventType));
+        System.out.println(courseEventController.listCourseEventByType(nullCourseId, nullEventType));
+    }
+
+    @Test
+    void addCourseEvent() {
+    }
+
+    @Test
+    void updateCourseEvent() {
+    }
+
+    @Test
+    void deleteCourseEvent() {
     }
 }

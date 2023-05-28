@@ -122,7 +122,7 @@ public class UserController {
     public boolean setUserRole(@PathVariable Integer userId, @PathVariable String role) {
         User user = userService.getById(userId);
         user.setRole(role);
-        return userService.save(user);
+        return userService.updateById(user);
     }
 
     @ApiOperation(value = "检测是否登录")
